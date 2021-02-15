@@ -2,7 +2,7 @@
 
 var amqp = require('amqplib');
 var basename = require('path').basename;
-var all = require('bluebird').all;
+var all = Promise.all
 
 var keys = process.argv.slice(2);
 if (keys.length < 1) {

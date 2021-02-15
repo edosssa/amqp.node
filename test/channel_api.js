@@ -6,8 +6,8 @@ var util = require('./util');
 var succeed = util.succeed, fail = util.fail;
 var schedule = util.schedule;
 var randomString = util.randomString;
-var Promise = require('bluebird');
 var Buffer = require('safe-buffer').Buffer;
+var {fromCallback} = require("../lib/util")
 
 var URL = process.env.URL || 'amqp://localhost';
 
@@ -550,7 +550,7 @@ confirmtest('multiple confirms', function(ch) {
         var cs = [];
 
         function sendAndPushPromise() {
-          var conf = Promise.fromCallback(function(cb) {
+          var conf = fromCallback(function(cb) {
             return ch.sendToQueue(q, Buffer.from('bleep'), {}, cb);
           });
           cs.push(conf);

@@ -3,7 +3,6 @@
 'use strict';
 
 var assert = require('assert');
-var Promise = require('bluebird');
 var Channel = require('../lib/channel').Channel;
 var Connection = require('../lib/connection').Connection;
 var util = require('./util');
@@ -13,6 +12,7 @@ var defs = require('../lib/defs');
 var conn_handshake = require('./connection').connection_handshake;
 var OPEN_OPTS = require('./connection').OPEN_OPTS;
 var Buffer = require('safe-buffer').Buffer;
+var {fromCallback} = require("../lib/util")
 
 var LOG_ERRORS = process.env.LOG_ERRORS;
 
@@ -79,7 +79,7 @@ var DELIVER_FIELDS = {
 function open(ch) {
   return Promise.try(function() {
     ch.allocate();
-    return Promise.fromCallback(function(cb) {
+    return fromCallback(function(cb) {
       ch._rpc(defs.ChannelOpen, {outOfBand: ''}, defs.ChannelOpenOk, cb);
     });
   });

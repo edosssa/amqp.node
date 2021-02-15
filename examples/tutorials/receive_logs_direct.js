@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var amqp = require('amqplib');
-var all = require('bluebird').all;
+var all = Promise.all
 var basename = require('path').basename;
 
 var severities = process.argv.slice(2);
